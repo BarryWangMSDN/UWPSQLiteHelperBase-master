@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="UWPSQLiteHelperBase.View.ManagementPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPSQLiteHelperBase.View"
+    xmlns:localvm="using:UWPSQLiteHelperBase.ViewModel"
+    xmlns:localmodel="using:UWPSQLiteHelperBase.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+       
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" x:Name="listview" ItemsSource="{x:Bind manageVM.DefaultPeopleModel}"  MaxWidth="360" MaxHeight="640">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localmodel:PeopleModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Bind ID}"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" Text="{x:Bind Alias}"/>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Bind Name}"/>
+                        <TextBlock Grid.Column="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Bind PermissionLevel}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>
