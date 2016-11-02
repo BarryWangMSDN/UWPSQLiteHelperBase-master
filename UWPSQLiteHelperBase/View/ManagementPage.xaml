@@ -15,17 +15,18 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+            
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" x:Name="listview" ItemsSource="{x:Bind manageVM.DefaultPeopleModel}"  MaxWidth="360" MaxHeight="640">
+        <ListView Grid.Column="0"  x:Name="listview" ItemsSource="{x:Bind manageVM.DefaultPeopleModel}"  MaxWidth="1000" MaxHeight="640">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localmodel:PeopleModel">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Bind ID}"/>
                         <TextBlock Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" Text="{x:Bind Alias}"/>
@@ -35,6 +36,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        
     </Grid>
 </Page>
