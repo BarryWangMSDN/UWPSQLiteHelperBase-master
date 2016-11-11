@@ -9,14 +9,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-       
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            
         </Grid.ColumnDefinitions>
         <ListView Grid.Column="0"  x:Name="listview" ItemsSource="{x:Bind manageVM.DefaultPeopleModel}"  MaxWidth="1000" MaxHeight="640">
             <ListView.ItemTemplate>
@@ -35,7 +33,27 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <ContentPresenter Grid.Row="0"/>
+                                    <Border BorderBrush="Blue" BorderThickness="0" Grid.Row="1"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
-        
+
     </Grid>
 </Page>

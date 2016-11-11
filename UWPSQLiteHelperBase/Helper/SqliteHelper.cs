@@ -1,11 +1,9 @@
 ﻿using SQLitePCL;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQLite.Net.Platform.WinRT;
 using System.IO;
 using Windows.Storage;
 
@@ -26,9 +24,9 @@ namespace UWPSQLiteHelperBase.Helper
 
         
 
-        public void sqlite_createtable(string tablename)
+        public void sqlite_createtable(string db,string tablename)
         {
-            var _connection = new SQLiteConnection(tablename);
+            var _connection = new SQLiteConnection(db);
             using (var statement = _connection.Prepare(create_table_command(tablename)))
             {
                 statement.Step();
