@@ -30,8 +30,6 @@ namespace UWPSQLiteHelperBase
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            SqliteHelper helper = new SqliteHelper();
-            helper.sqlite_createtable("testdb.db","testtable");
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(UWPSQLiteHelperBase.View.ManagementPage));
 

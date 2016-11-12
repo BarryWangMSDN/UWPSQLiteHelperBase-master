@@ -38,7 +38,7 @@ namespace UWPSQLiteHelperBase.Helper
 
         private string create_table_command(string table_name)
         {
-            return SQL_CREATE_TABLE;
+            return "CREATE TABLE IF NOT EXISTS " + table_name + " (Key TEXT,Value TEXT);";
         }
 
      
