@@ -30,9 +30,12 @@ namespace UWPSQLiteHelperBase
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            //SqliteHelper1 helper1 = new SqliteHelper1();
+            // helper.sqlite_createtable("managementtable");
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(UWPSQLiteHelperBase.View.ManagementPage));
-
+            //SqliteHelper2 helper2 = new SqliteHelper2();
+            //helper2.readtable("PeopleModel");
 
         }
     }

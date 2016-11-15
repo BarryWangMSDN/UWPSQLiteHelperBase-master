@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite.Net.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace UWPSQLiteHelperBase.Model
         #region properties
         private int id;
 
+
+        [PrimaryKey, AutoIncrement]
         public int ID
         {
             get { return id; }
@@ -19,6 +22,8 @@ namespace UWPSQLiteHelperBase.Model
 
         private string name;
 
+
+        [MaxLength(64)]
         public string Name
         {
             get { return name; }
