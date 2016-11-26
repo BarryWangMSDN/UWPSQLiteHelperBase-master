@@ -10,6 +10,7 @@ using Windows.Storage;
 using UWPSQLiteHelperBase.Model;
 using System.Diagnostics;
 
+
 namespace UWPSQLiteHelperBase.Helper
 {
     public class SqliteHelper2
@@ -36,7 +37,7 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
-        public List<PeopleModel> readtable(string tablename)
+        public List<PeopleModel> ReadPeopleTable()
         {
             using (var db = DbConnection)
             {
@@ -47,7 +48,27 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
-       
-       
+        internal void CreateThreadsTable()
+        {
+            using (var db = DbConnection)
+            {
+                var createtableresult = db.CreateTable<ThreadDetailsModel>();
+                var info = db.GetMapping(typeof(ThreadDetailsModel));
+            }
+              
+        }
+
+        public List<ThreadDetailsModel> ReadThredsTable()
+        {
+            using (var db = DbConnection)
+            {
+                db.TraceListener = new DebugTraceListener();
+                List<ThreadDetailsModel> threads = (from p in db.Table<ThreadDetailsModel>()
+                                            select p).ToList();
+                return threads;
+            }
+        }
+
+
     }
 }

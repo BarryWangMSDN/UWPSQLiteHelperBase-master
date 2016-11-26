@@ -105,11 +105,16 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\PeopleModel.cs" />
+    <Compile Include="Model\ThreadDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\HostViewModel .cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />
+    <Compile Include="ViewModel\ThreadDetailsVM.cs" />
     <Compile Include="View\ManagementPage.xaml.cs">
       <DependentUpon>ManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ThreadDestails.xaml.cs">
+      <DependentUpon>ThreadDestails.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +147,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ThreadDestails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

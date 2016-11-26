@@ -42,7 +42,7 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
-        public void sqlite_createtable(string tablename)
+        private void sqlite_createtable(string tablename)
         {           
              _connection = new SQLiteConnection(DB_NAME);
             using (var statement = _connection.Prepare(create_table_command(tablename)))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWPSQLiteHelperBase.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -12,26 +13,22 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using UWPSQLiteHelperBase.ViewModel;
 
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
 namespace UWPSQLiteHelperBase.View
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class ManagementPage : Page
+    public sealed partial class ThreadDestails : Page
     {
-        public ManagementVM manageVM {get ; set; }
-        public ManagementPage()
+         ThreadDetailsVM threadVM { get; set; }
+
+        public ThreadDestails()
         {
             this.InitializeComponent();
-            this.manageVM = new ManagementVM();
-            
+            this.threadVM = new ThreadDetailsVM();
         }
-
-       
     }
 }
