@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using UWPSQLiteHelperBase.Helper;
+using Microsoft.Toolkit.Uwp;
+using UWPSQLiteHelperBase.View;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,23 +28,40 @@ namespace UWPSQLiteHelperBase
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            //SqliteHelper1 helper1 = new SqliteHelper1();
-            // helper.sqlite_createtable("managementtable");
-            Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(UWPSQLiteHelperBase.View.ManagementPage));
-            //SqliteHelper2 helper2 = new SqliteHelper2();
-            //helper2.readtable("PeopleModel");
+            hamburgerMenuControl.ItemsSource = MenuItem.GetMainItems();
+            hamburgerMenuControl.OptionsItemsSource = MenuItem.GetOptionsItems();
 
         }
 
-        private void threadsbtn_Click(object sender, RoutedEventArgs e)
+        private void OnMenuItemClick(object sender, ItemClickEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(UWPSQLiteHelperBase.View.ThreadDestails));
+            var menuItem = e.ClickedItem as MenuItem;
+            contentFrame.Navigate(menuItem.PageType);
+        }
+
+    }
+
+    public class MenuItem
+    {
+        public Symbol Icon { get; set; }
+        public string Name { get; set; }
+        public Type PageType { get; set; }
+
+        public static List<MenuItem> GetMainItems()
+        {
+            var items = new List<MenuItem>();
+            items.Add(new MenuItem() { Icon = Symbol.Home, Name = "Main", PageType = typeof(MainPage) });
+            items.Add(new MenuItem() { Icon = Symbol.Play, Name = "ThreadDetails", PageType = typeof(ThreadDestails) });
+            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "MainPage", PageType = typeof(MainPage) });
+            return items;
+        }
+
+        public static List<MenuItem> GetOptionsItems()
+        {
+            var items = new List<MenuItem>();
+            items.Add(new MenuItem() { Icon = Symbol.Setting, Name = "Management", PageType = typeof(ManagementPage) });
+            return items;
         }
     }
+
 }
