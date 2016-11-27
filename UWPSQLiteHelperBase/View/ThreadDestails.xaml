@@ -5,9 +5,46 @@
     xmlns:local="using:UWPSQLiteHelperBase.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localvm="using:UWPSQLiteHelperBase.ViewModel"
+    xmlns:localmodel="using:UWPSQLiteHelperBase.Model"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <ListView x:Name="threadslist" ItemsSource="{x:Bind threadVM.Threadsmodel}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localmodel:ThreadDetailsModel">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="600"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="0" x:Name="threadid" Text="{x:Bind ID}"/>
+                            <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="1" x:Name="threadowner" Text="{x:Bind Owner}"/>
+                            <HyperlinkButton HorizontalAlignment="Left"  Grid.Column="2" x:Name="threadtitle" Content="{x:Bind ThreadTitle}"  NavigateUri="{x:Bind ThreadURL}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+       
 
+
+
+          
+        
     </Grid>
 </Page>

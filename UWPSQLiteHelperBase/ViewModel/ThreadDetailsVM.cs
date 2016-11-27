@@ -18,7 +18,9 @@ namespace UWPSQLiteHelperBase.ViewModel
         public ThreadDetailsVM()
         {
             SqliteHelper2 helper = new SqliteHelper2();
-            helper.CreateThreadsTable();
+            helper.CreateThreadsTable();        
+            List<ThreadDetailsModel> peoplelist = helper.ReadThredsTable();
+            peoplelist.ForEach(p => threadsmodel.Add(p));
         }
     }
 }

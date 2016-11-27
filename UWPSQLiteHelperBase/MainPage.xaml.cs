@@ -49,8 +49,7 @@ namespace UWPSQLiteHelperBase
 
         public static List<MenuItem> GetMainItems()
         {
-            var items = new List<MenuItem>();
-            items.Add(new MenuItem() { Icon = Symbol.Home, Name = "Main", PageType = typeof(MainPage) });
+            var items = new List<MenuItem>();       
             items.Add(new MenuItem() { Icon = Symbol.Play, Name = "ThreadDetails", PageType = typeof(ThreadDestails) });
             items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "MainPage", PageType = typeof(MainPage) });
             return items;

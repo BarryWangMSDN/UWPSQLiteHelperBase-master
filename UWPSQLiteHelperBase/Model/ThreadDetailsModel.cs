@@ -61,6 +61,14 @@ namespace UWPSQLiteHelperBase.Model
                 OnPropertyChanged("Uri"); }
         }
 
+        private string threadtitle;
+
+        public string ThreadTitle
+        {
+            get { return threadtitle; }
+            set { threadtitle = value; }
+        }
+
         private string casetype;
 
         public string Casetype
