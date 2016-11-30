@@ -52,13 +52,13 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Black" Margin="0,10" Grid.Row="0" Text="GUID:"></TextBlock>
-                <TextBox HorizontalAlignment="Left" Grid.Row="0" Margin="100,0,0,3" Width="300"/>
+                <TextBox x:Name="guidtxt" HorizontalAlignment="Left" Grid.Row="0" Margin="100,0,0,3" Width="300"/>
                 <TextBlock Foreground="Black" Margin="0,10" Grid.Row="1" Text="ThreadTItle:"></TextBlock>
-                <TextBox HorizontalAlignment="Left" Grid.Row="1" Margin="100,0,0,3" Width="300"/>
+                <TextBox x:Name="threadtitletxt" HorizontalAlignment="Left" Grid.Row="1" Margin="100,0,0,3" Width="300"/>
                 <TextBlock Foreground="Black" Margin="0,10" Grid.Row="2" Text="ThreadURL:"></TextBlock>
-                <TextBox HorizontalAlignment="Left" Grid.Row="2" Margin="100,0,0,3" Width="300"/>
+                <TextBox x:Name="threadurltxt" HorizontalAlignment="Left" Grid.Row="2" Margin="100,0,0,3" Width="300"/>
                 <TextBlock Foreground="Black" Margin="0,10" Grid.Row="3" Text="Owner:"></TextBlock>
-                <AutoSuggestBox HorizontalAlignment="Left" Grid.Row="3" Margin="100,4,0,3" Width="300"/>
+                <AutoSuggestBox x:Name="ownertxt" HorizontalAlignment="Left" Grid.Row="3" Margin="100,4,0,3" Width="300"/>
                 <TextBlock Foreground="Black" Margin="0,10" Grid.Row="4" Text="ThreadType:"></TextBlock>
                 <ComboBox HorizontalAlignment="Left" Grid.Row="4" Margin="100,4,0,3" Width="300"/>
                 <Button x:Name="AddThreadBtn" Width="80" Content="Add" Grid.Row="6"/>
