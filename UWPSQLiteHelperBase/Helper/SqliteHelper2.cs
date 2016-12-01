@@ -79,5 +79,15 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
+        public int DeleteFromThreadTable(ThreadDetailsModel detailmodel)
+        {
+            using (var db = DbConnection)
+            {
+                db.TraceListener = new DebugTraceListener();
+                var insertresult = db.Delete(detailmodel);
+                return insertresult;
+            }
+        }
+
     }
 }

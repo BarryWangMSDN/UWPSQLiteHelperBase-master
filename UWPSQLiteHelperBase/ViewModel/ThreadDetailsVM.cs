@@ -14,6 +14,8 @@ namespace UWPSQLiteHelperBase.ViewModel
 {
    public class ThreadDetailsVM:INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         #region Helper Class
         SqliteHelper2 helper = new SqliteHelper2();
         #endregion
@@ -30,7 +32,6 @@ namespace UWPSQLiteHelperBase.ViewModel
         public ObservableCollection<ThreadType> Threadsubstatus { get { return this.threadsubstatus; } }
 
         private ThreadType testthreadtype;
-
         public ThreadType Testthreadtype
         {
             get { return testthreadtype; }
@@ -43,9 +44,7 @@ namespace UWPSQLiteHelperBase.ViewModel
         #region commands
         //Insert Record Command
         private ICommand insertCommand;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+      
         public ICommand InsertCommand
         {
             get
@@ -56,7 +55,7 @@ namespace UWPSQLiteHelperBase.ViewModel
         public void insertrecordcommand(object detail)
         {
             var x = ((ThreadDetailsVM)detail).TextModel;
-            x.Casetype = Testthreadtype.Substatus;
+            x.Casetype = Testthreadtype.Substatus;//here should handle null value
             threadsmodel.Add(x);
             try
             {
@@ -66,6 +65,38 @@ namespace UWPSQLiteHelperBase.ViewModel
             {
                 Debug.WriteLine("Insert to Database failed with the following reason"+ex.Message);
             }
+        }
+
+
+        private ICommand deleteCommand;
+
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ?? (deleteCommand = new RelayCommand(p => deleterecordCommand(p)));
+            }
+        }
+
+        public void deleterecordCommand(object detail)
+        {
+            var x = ((ThreadDetailsVM)detail).TextModel;
+            var GuidToDelete = x.Guid;
+            var y = ((ThreadDetailsVM)detail).threadsmodel;
+              for(int i=0;i<y.Count;i++)
+            {
+                if(y[i].Guid==GuidToDelete)
+                {
+                    //delete from sqlite
+                    helper.DeleteFromThreadTable(y[i]);
+                    //delete from collection
+                    y.RemoveAt(i);
+                   
+                }
+            }
+           
+           
+
         }
         #endregion
 
@@ -84,6 +115,9 @@ namespace UWPSQLiteHelperBase.ViewModel
             //ThreadStatus initialization
             threadsubstatus.Add(new ThreadType { Substatus = "SA" });
             threadsubstatus.Add(new ThreadType { Substatus = "EscalationFTE" });
+            threadsubstatus.Add(new ThreadType { Substatus = "EscalationNonFTE" });
+            threadsubstatus.Add(new ThreadType { Substatus = "Following" });
+            threadsubstatus.Add(new ThreadType { Substatus = "BadRequirement" });
         }
     }
 }
