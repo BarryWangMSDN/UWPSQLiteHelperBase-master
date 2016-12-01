@@ -29,6 +29,7 @@ namespace UWPSQLiteHelperBase.View
         {
             this.InitializeComponent();
             this.threadVM = new ThreadDetailsVM();
+            this.DataContext = threadVM;
         }
     }
 }

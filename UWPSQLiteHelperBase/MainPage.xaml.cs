@@ -51,7 +51,7 @@ namespace UWPSQLiteHelperBase
         {
             var items = new List<MenuItem>();       
             items.Add(new MenuItem() { Icon = Symbol.Play, Name = "ThreadDetails", PageType = typeof(ThreadDestails) });
-            items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "MainPage", PageType = typeof(MainPage) });
+          //items.Add(new MenuItem() { Icon = Symbol.Shop, Name = "MainPage", PageType = typeof(MainPage) });
             return items;
         }
 
