@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Model\PeopleModel.cs" />
     <Compile Include="Model\ThreadDetailsModel.cs" />
+    <Compile Include="Model\ThreadType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\HostViewModel .cs" />
     <Compile Include="ViewModel\ManagementVM.cs" />
