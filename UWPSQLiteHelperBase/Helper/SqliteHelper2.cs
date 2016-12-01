@@ -69,6 +69,15 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
+        public int InsertorReplaceThreadTable(ThreadDetailsModel detailmodel)
+        {
+            using (var db = DbConnection)
+            {
+                db.TraceListener = new DebugTraceListener();
+                var insertresult = db.InsertOrReplace(detailmodel);
+                return insertresult;
+            }
+        }
 
     }
 }

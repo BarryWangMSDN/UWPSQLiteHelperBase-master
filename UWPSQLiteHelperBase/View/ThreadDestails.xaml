@@ -15,7 +15,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ListView x:Name="threadslist" ItemsSource="{x:Bind threadVM.Threadsmodel}">
+            <ListView ScrollViewer.VerticalScrollMode="Auto" x:Name="threadslist" ItemsSource="{x:Bind threadVM.Threadsmodel}">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsStackPanel/>
