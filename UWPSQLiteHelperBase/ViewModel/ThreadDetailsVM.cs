@@ -9,6 +9,8 @@ using UWPSQLiteHelperBase.Helper;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.ComponentModel;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace UWPSQLiteHelperBase.ViewModel
 {
@@ -26,7 +28,13 @@ namespace UWPSQLiteHelperBase.ViewModel
 
         //right panel model
         private ThreadDetailsModel textmodel = new ThreadDetailsModel();
-        public ThreadDetailsModel TextModel { get { return this.textmodel; } }
+        public ThreadDetailsModel TextModel
+        {
+            get { return this.textmodel;              
+            }
+            set { textmodel = value;
+                    }
+        }
 
         private ObservableCollection<ThreadType> threadsubstatus = new ObservableCollection<ThreadType>();
         public ObservableCollection<ThreadType> Threadsubstatus { get { return this.threadsubstatus; } }
@@ -98,8 +106,31 @@ namespace UWPSQLiteHelperBase.ViewModel
            
 
         }
+
+        private ICommand pasteCommand;
+
+        public ICommand PasteCommand
+        {
+            get
+            {
+                return pasteCommand ?? (pasteCommand = new RelayCommand(p => PasteTextCommand(p)));
+            }
+        }
+
+        public void PasteTextCommand(object change)
+        {
+
+        }
+
         #endregion
 
+        #region Events
+        public void guidtxt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            textmodel.Guid = ((TextBox)sender).Text;
+            textmodel.ThreadURL = "https://social.msdn.microsoft.com/Forums/windowsapps/en-US/" + ((TextBox)sender).Text;
+        }
+        #endregion
         public ThreadDetailsVM()
         {
             //ListView data refersh
