@@ -58,9 +58,10 @@ namespace UWPSQLiteHelperBase.Model
         {
             get { return threadurl; }
             set { threadurl = value;
-                OnPropertyChanged("Uri"); }
+                OnPropertyChanged("ThreadURL"); }
         }
-
+        //Silly mistake...Here my OnPropertyChanged name is Uri... I don't know why I set it and I used 2days to debug
+        //Next time I should first navigate to this property to see whether it is triggered....
         private string threadtitle;
 
         public string ThreadTitle

@@ -127,6 +127,7 @@ namespace UWPSQLiteHelperBase.ViewModel
         #region Events
         public void guidtxt_LostFocus(object sender, RoutedEventArgs e)
         {
+            var x = e.OriginalSource;
             textmodel.Guid = ((TextBox)sender).Text;
             textmodel.ThreadURL = "https://social.msdn.microsoft.com/Forums/windowsapps/en-US/" + ((TextBox)sender).Text;
         }
