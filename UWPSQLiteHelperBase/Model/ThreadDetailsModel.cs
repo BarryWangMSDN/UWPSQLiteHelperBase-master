@@ -67,7 +67,9 @@ namespace UWPSQLiteHelperBase.Model
         public string ThreadTitle
         {
             get { return threadtitle; }
-            set { threadtitle = value; }
+            set { threadtitle = value;
+                OnPropertyChanged("ThreadTitle");
+            }
         }
 
         private string casetype;

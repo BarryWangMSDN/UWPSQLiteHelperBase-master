@@ -131,6 +131,16 @@ namespace UWPSQLiteHelperBase.ViewModel
             textmodel.Guid = ((TextBox)sender).Text;
             textmodel.ThreadURL = "https://social.msdn.microsoft.com/Forums/windowsapps/en-US/" + ((TextBox)sender).Text;
         }
+
+        public void threadslist_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ThreadDetailsModel x =(sender as ListView).SelectedItem as ThreadDetailsModel;
+            textmodel.Guid = x.Guid;
+            textmodel.ThreadURL = x.ThreadURL;
+            textmodel.Owner = x.Owner;
+            textmodel.ThreadTitle = x.ThreadTitle;
+            textmodel.Casetype = x.Casetype;
+        }
         #endregion
         public ThreadDetailsVM()
         {
