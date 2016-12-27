@@ -89,5 +89,14 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
+        public void CreateTriggerFromTable()
+        {
+            using (var db = DbConnection)
+            {
+              
+            }
+
+        }
+
     }
 }
