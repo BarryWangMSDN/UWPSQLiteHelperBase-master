@@ -99,6 +99,7 @@
     <Compile Include="Control\infocontrol.xaml.cs">
       <DependentUpon>infocontrol.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CSVParser.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\SqliteHelper1.cs" />
     <Compile Include="Helper\SqliteHelper2.cs" />
