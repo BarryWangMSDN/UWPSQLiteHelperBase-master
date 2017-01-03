@@ -32,6 +32,6 @@ namespace UWPSQLiteHelperBase.View
             this.DataContext = threadVM;
         }
 
-        
+      
     }
 }

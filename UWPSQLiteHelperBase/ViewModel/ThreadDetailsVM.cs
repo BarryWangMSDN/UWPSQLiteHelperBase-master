@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.Storage.Pickers;
 
 namespace UWPSQLiteHelperBase.ViewModel
 {
@@ -140,6 +141,12 @@ namespace UWPSQLiteHelperBase.ViewModel
             textmodel.Owner = x.Owner;
             textmodel.ThreadTitle = x.ThreadTitle;
             textmodel.Casetype = x.Casetype;
+        }
+
+        public void LoadFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker filepicker = new FileOpenPicker();
+            
         }
         #endregion
         public ThreadDetailsVM()
