@@ -12,6 +12,8 @@ using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.Storage.Pickers;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace UWPSQLiteHelperBase.ViewModel
 {
@@ -20,9 +22,11 @@ namespace UWPSQLiteHelperBase.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region Helper Class
-        SqliteHelper2 helper = new SqliteHelper2();
+        SqliteHelper2 sqlhelper = new SqliteHelper2();
+        CSVParser parser = new CSVParser();
+        CommonHelper helper = new CommonHelper();
         #endregion
-        #region property for binding
+        #region property
         //left panel listview model
         private ObservableCollection<ThreadDetailsModel> threadsmodel = new ObservableCollection<ThreadDetailsModel>();
         public ObservableCollection<ThreadDetailsModel> Threadsmodel { get { return this.threadsmodel; } }
@@ -49,6 +53,7 @@ namespace UWPSQLiteHelperBase.ViewModel
             }
         }
 
+        public string csvtext { get; set; }
         #endregion
         #region commands
         //Insert Record Command
@@ -68,7 +73,7 @@ namespace UWPSQLiteHelperBase.ViewModel
             threadsmodel.Add(x);
             try
             {
-                helper.InsertorReplaceThreadTable(x);
+                sqlhelper.InsertorReplaceThreadTable(x);
             }
             catch(Exception ex)
             {
@@ -97,7 +102,7 @@ namespace UWPSQLiteHelperBase.ViewModel
                 if(y[i].Guid==GuidToDelete)
                 {
                     //delete from sqlite
-                    helper.DeleteFromThreadTable(y[i]);
+                    sqlhelper.DeleteFromThreadTable(y[i]);
                     //delete from collection
                     y.RemoveAt(i);
                    
@@ -143,18 +148,39 @@ namespace UWPSQLiteHelperBase.ViewModel
             textmodel.Casetype = x.Casetype;
         }
 
-        public void LoadFileBtn_Click(object sender, RoutedEventArgs e)
+        public async void LoadFileBtn_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker filepicker = new FileOpenPicker();
-            
+            filepicker.ViewMode = PickerViewMode.Thumbnail;
+            filepicker.SuggestedStartLocation = PickerLocationId.Desktop;
+            filepicker.FileTypeFilter.Add(".csv");
+            StorageFile file = await filepicker.PickSingleFileAsync();
+            if (file != null)
+            {
+                var csvtext=await helper.ReadStringFromFile(file);
+                parser.RawText = csvtext;               
+                parser.HasHeaderRow = true;
+                List<Dictionary<string, string>> parserresult =parser.Parse();
+                foreach(var result in parserresult)
+                {
+                    ThreadDetailsModel recorditem = new ThreadDetailsModel();
+                    recorditem.Casetype = result["Sub Status"];
+                    recorditem.Guid = result["External ID (Thread)"];
+                    recorditem.IsAnswered = result["Is Answered (Thread)"];
+                    recorditem.Owner = result["Owner"];
+                    recorditem.ThreadTitle = result["Title"];
+                    recorditem.ThreadURL = result["URL (Thread)"];
+                    threadsmodel.Add(recorditem);
+                }             
+            }
         }
         #endregion
         public ThreadDetailsVM()
         {
             //ListView data refersh
            
-            helper.CreateThreadsTable();        
-            List<ThreadDetailsModel> peoplelist = helper.ReadThredsTable();
+            sqlhelper.CreateThreadsTable();        
+            List<ThreadDetailsModel> peoplelist = sqlhelper.ReadThredsTable();
             peoplelist.ForEach(p => threadsmodel.Add(p));
             //Textbox data initialization(test data)
             textmodel.Guid = "dc505f68-d120-43e3-a9e1-d7c77746d588";

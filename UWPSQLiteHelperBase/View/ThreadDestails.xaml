@@ -72,7 +72,7 @@
                 <Button x:Name="AddThreadBtn" Width="80" Content="Add" Grid.Row="6" Command="{Binding InsertCommand}" CommandParameter="{x:Bind threadVM}"/>
                 <Button x:Name="DeleteThreadBtn" Width="80" Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{x:Bind threadVM}" Grid.Row="6" Margin="120,0,0,0"/>
                 <Button x:Name="EditThreadBtn" Width="80" Content="Edit" Grid.Row="6" Margin="240,0,0,0"/>
-                <Button x:Name="LoadFileBtn" Width="80" Content="LoadFile"  Grid.Row="6" Click="LoadFileBtn_Click" Margin="360,0,0,0"/>
+                <Button x:Name="LoadFileBtn" Width="80" Content="LoadFile"  Grid.Row="6" Click="{x:Bind threadVM.LoadFileBtn_Click}" Margin="360,0,0,0"/>
             </Grid>
         </StackPanel>
     </Grid>

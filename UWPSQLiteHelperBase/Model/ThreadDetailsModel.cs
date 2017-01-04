@@ -82,9 +82,9 @@ namespace UWPSQLiteHelperBase.Model
             }
         }
 
-        private bool isanswered;
+        private string isanswered;
 
-        public bool IsAnswered
+        public string IsAnswered
         {
             get { return isanswered; }
             set { isanswered = value; }
