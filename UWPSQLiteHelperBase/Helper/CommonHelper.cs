@@ -17,7 +17,7 @@ namespace UWPSQLiteHelperBase.Helper
             byte[] fileContent = new byte[reader.UnconsumedBufferLength];
             reader.ReadBytes(fileContent);
             var result = Encoding.UTF8.GetString(fileContent, 0, fileContent.Length);
-            return result;
+            return result;           
         }
     }
 }

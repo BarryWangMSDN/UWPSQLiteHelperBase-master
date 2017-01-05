@@ -47,25 +47,38 @@ namespace UWPSQLiteHelperBase.Helper
                 Dictionary<string, string> recordItem = new Dictionary<string, string>();
 
                 int fieldIncrementer = 0;
-
-
-                foreach (var field in fields)
+                //parse line into dictionary
+                if (fields.Length == fieldList.Count)
                 {
-                    string key = fieldIncrementer.ToString();
-
-                    if (this.HasHeaderRow)
+                    foreach (var field in fields)
                     {
-                        if (fields.Length == fieldList.Count)
+                        string key = fieldIncrementer.ToString();
+
+                        if (this.HasHeaderRow)
                         {
+
                             key = fieldList[fieldIncrementer];
+
                         }
+                        recordItem.Add(key, field);
+                        fieldIncrementer++;
                     }
-
-                    recordItem.Add(key, field);
-                    fieldIncrementer++;
-
                 }
+                else if(fields.Length>fieldList.Count)
+                {
+                   
+                    for(int j=0;j<fieldList.Count;j++)
+                    {
+                        string key = fieldIncrementer.ToString();
+                        if (this.HasHeaderRow)
+                        {
 
+                            key = fieldList[j];
+
+                        }
+                        recordItem.Add(key, fields[j]);
+                    }
+                }
                 parsedResult.Add(recordItem);
             }
             return parsedResult;

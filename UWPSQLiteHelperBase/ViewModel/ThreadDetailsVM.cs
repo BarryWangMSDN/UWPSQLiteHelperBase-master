@@ -14,6 +14,7 @@ using Windows.UI.Xaml;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI.Popups;
 
 namespace UWPSQLiteHelperBase.ViewModel
 {
@@ -161,17 +162,25 @@ namespace UWPSQLiteHelperBase.ViewModel
                 parser.RawText = csvtext;               
                 parser.HasHeaderRow = true;
                 List<Dictionary<string, string>> parserresult =parser.Parse();
-                foreach(var result in parserresult)
+                try
                 {
-                    ThreadDetailsModel recorditem = new ThreadDetailsModel();
-                    recorditem.Casetype = result["Sub Status"];
-                    recorditem.Guid = result["External ID (Thread)"];
-                    recorditem.IsAnswered = result["Is Answered (Thread)"];
-                    recorditem.Owner = result["Owner"];
-                    recorditem.ThreadTitle = result["Title"];
-                    recorditem.ThreadURL = result["URL (Thread)"];
-                    threadsmodel.Add(recorditem);
-                }             
+                    foreach (var result in parserresult)
+                    {
+                        ThreadDetailsModel recorditem = new ThreadDetailsModel();
+                        recorditem.Casetype = result["Sub Status"];
+                        recorditem.Guid = result["External ID (Thread)"];
+                        recorditem.IsAnswered = result["Is Answered (Thread)"];
+                        recorditem.Owner = result["Owner"];
+                        recorditem.ThreadTitle = result["Title"];
+                        recorditem.ThreadURL = result["URL (Thread)"];
+                        threadsmodel.Add(recorditem);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Debug.Write(ex.Message.ToString());
+                }
+                  
             }
         }
         #endregion
