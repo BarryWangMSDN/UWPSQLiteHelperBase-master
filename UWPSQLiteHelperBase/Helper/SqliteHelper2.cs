@@ -9,7 +9,7 @@ using System.IO;
 using Windows.Storage;
 using UWPSQLiteHelperBase.Model;
 using System.Diagnostics;
-
+using System.Collections.ObjectModel;
 
 namespace UWPSQLiteHelperBase.Helper
 {
@@ -74,11 +74,21 @@ namespace UWPSQLiteHelperBase.Helper
             using (var db = DbConnection)
             {
                 db.TraceListener = new DebugTraceListener();
-                var insertresult = db.InsertOrReplace(detailmodel);
+                var insertresult = db.Insert(detailmodel);
                 return insertresult;
             }
         }
 
+
+        public int InsertorReplaceAll(ObservableCollection<ThreadDetailsModel> collection)
+        {
+            using (var db = DbConnection)
+            {
+                db.TraceListener = new DebugTraceListener();
+                var updateresult = db.UpdateAll(collection);
+                return updateresult;
+            }
+        }
         public int DeleteFromThreadTable(ThreadDetailsModel detailmodel)
         {
             using (var db = DbConnection)

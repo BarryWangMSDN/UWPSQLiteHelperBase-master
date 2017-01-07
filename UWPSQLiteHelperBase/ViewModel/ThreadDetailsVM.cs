@@ -67,11 +67,19 @@ namespace UWPSQLiteHelperBase.ViewModel
                 return insertCommand ?? (insertCommand = new RelayCommand(p=> insertrecordcommand(p)));
             } 
         }
-        public void insertrecordcommand(object detail)
+        public async void insertrecordcommand(object detail)
         {
             var x = ((ThreadDetailsVM)detail).TextModel;
-            x.Casetype = Testthreadtype.Substatus;//here should handle null value
-            threadsmodel.Add(x);
+            if (Testthreadtype.Substatus != null)
+            {
+                x.Casetype = Testthreadtype.Substatus;//here should handle null value
+                threadsmodel.Add(x);
+            }
+           else
+            {
+             await helper.ShowMessage("SubStatus is null, please check choose it");
+            }  
+           
             try
             {
                 sqlhelper.InsertorReplaceThreadTable(x);
@@ -105,28 +113,28 @@ namespace UWPSQLiteHelperBase.ViewModel
                     //delete from sqlite
                     sqlhelper.DeleteFromThreadTable(y[i]);
                     //delete from collection
-                    y.RemoveAt(i);
-                   
+                    y.RemoveAt(i);                 
                 }
-            }
-           
-           
+            }         
 
         }
 
-        private ICommand pasteCommand;
+        private ICommand saveCommand;
 
-        public ICommand PasteCommand
+        public ICommand SaveCommand
         {
             get
             {
-                return pasteCommand ?? (pasteCommand = new RelayCommand(p => PasteTextCommand(p)));
+                return saveCommand ?? (saveCommand = new RelayCommand(p => SaveRecordsCommand()));
             }
         }
 
-        public void PasteTextCommand(object change)
+        public void SaveRecordsCommand()
         {
-
+            foreach(var item in threadsmodel)
+            {
+                 sqlhelper.InsertorReplaceThreadTable(item);
+            }
         }
 
         #endregion
@@ -141,12 +149,16 @@ namespace UWPSQLiteHelperBase.ViewModel
 
         public void threadslist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ThreadDetailsModel x =(sender as ListView).SelectedItem as ThreadDetailsModel;
-            textmodel.Guid = x.Guid;
-            textmodel.ThreadURL = x.ThreadURL;
-            textmodel.Owner = x.Owner;
-            textmodel.ThreadTitle = x.ThreadTitle;
-            textmodel.Casetype = x.Casetype;
+            if((sender as ListView).SelectedItem!=null)
+            {
+                ThreadDetailsModel x = (sender as ListView).SelectedItem as ThreadDetailsModel;
+                textmodel.Guid = x.Guid;
+                textmodel.ThreadURL = x.ThreadURL;
+                textmodel.Owner = x.Owner;
+                textmodel.ThreadTitle = x.ThreadTitle;
+                textmodel.Casetype = x.Casetype;
+            }
+           
         }
 
         public async void LoadFileBtn_Click(object sender, RoutedEventArgs e)
@@ -162,25 +174,30 @@ namespace UWPSQLiteHelperBase.ViewModel
                 parser.RawText = csvtext;               
                 parser.HasHeaderRow = true;
                 List<Dictionary<string, string>> parserresult =parser.Parse();
-                try
-                {
+                parserresult.RemoveAt(parserresult.Count-1);
+                //try
+                //{
                     foreach (var result in parserresult)
                     {
-                        ThreadDetailsModel recorditem = new ThreadDetailsModel();
+                        ThreadDetailsModel recorditem = new ThreadDetailsModel();                  
                         recorditem.Casetype = result["Sub Status"];
                         recorditem.Guid = result["External ID (Thread)"];
                         recorditem.IsAnswered = result["Is Answered (Thread)"];
                         recorditem.Owner = result["Owner"];
                         recorditem.ThreadTitle = result["Title"];
                         recorditem.ThreadURL = result["URL (Thread)"];
+                        //add to collection
                         threadsmodel.Add(recorditem);
-                    }
+                    //insert to database   
+                    
                 }
-                catch(Exception ex)
-                {
-                    Debug.Write(ex.Message.ToString());
-                }
-                  
+              
+                //}
+                //catch(Exception ex)
+                //{
+                //    Debug.Write(ex.Message.ToString());
+                //}
+
             }
         }
         #endregion

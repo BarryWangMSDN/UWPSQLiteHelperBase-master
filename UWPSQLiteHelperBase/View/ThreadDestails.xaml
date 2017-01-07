@@ -17,36 +17,33 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ScrollViewer>
-                <ListView SelectionMode="Single" IsItemClickEnabled="False" SelectionChanged="{x:Bind threadVM.threadslist_SelectionChanged}" ScrollViewer.VerticalScrollMode="Auto" x:Name="threadslist" ItemsSource="{x:Bind threadVM.Threadsmodel}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsStackPanel/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="localmodel:ThreadDetailsModel">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="0" x:Name="threadid" Text="{x:Bind ID}"/>
-                                <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="1" x:Name="threadowner" Text="{x:Bind Owner}"/>
-                                <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="2" x:Name="casetype" Text="{x:Bind Casetype}"/>
-                                <HyperlinkButton HorizontalAlignment="Left"  Grid.Column="3" x:Name="threadtitle" Content="{x:Bind ThreadTitle}"  NavigateUri="{x:Bind ThreadURL}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-            </ScrollViewer>
-         </StackPanel>
+            <ListView SelectionMode="Single" IsItemClickEnabled="False" SelectionChanged="{x:Bind threadVM.threadslist_SelectionChanged}" ScrollViewer.VerticalScrollMode="Auto" x:Name="threadslist" ItemsSource="{x:Bind threadVM.Threadsmodel}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localmodel:ThreadDetailsModel">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="0" x:Name="threadid" Text="{x:Bind ID}"/>
+                            <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="1" x:Name="threadowner" Text="{x:Bind Owner}"/>
+                            <TextBlock TextAlignment="Center" Padding="5"  HorizontalAlignment="Stretch" Grid.Column="2" x:Name="casetype" Text="{x:Bind Casetype}"/>
+                            <HyperlinkButton HorizontalAlignment="Left"  Grid.Column="3" x:Name="threadtitle" Content="{x:Bind ThreadTitle}"  NavigateUri="{x:Bind ThreadURL}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
         <StackPanel Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -71,8 +68,8 @@
                 <ComboBox ItemsSource="{x:Bind threadVM.Threadsubstatus}" DisplayMemberPath="Substatus"  SelectedItem="{Binding Testthreadtype, Mode=TwoWay}" HorizontalAlignment="Left" Grid.Row="4" Margin="100,4,0,3" Width="300"/>
                 <Button x:Name="AddThreadBtn" Width="80" Content="Add" Grid.Row="6" Command="{Binding InsertCommand}" CommandParameter="{x:Bind threadVM}"/>
                 <Button x:Name="DeleteThreadBtn" Width="80" Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{x:Bind threadVM}" Grid.Row="6" Margin="120,0,0,0"/>
-                <Button x:Name="EditThreadBtn" Width="80" Content="Edit" Grid.Row="6" Margin="240,0,0,0"/>
-                <Button x:Name="LoadFileBtn" Width="80" Content="LoadFile"  Grid.Row="6" Click="{x:Bind threadVM.LoadFileBtn_Click}" Margin="360,0,0,0"/>
+                <Button x:Name="SaveRecBtn" Width="80" Content="SaveAll" Command="{Binding SaveCommand}" Grid.Row="6" Margin="360,0,0,0"/>
+                <Button x:Name="LoadFileBtn" Width="80" Content="LoadFile"  Grid.Row="6" Click="{x:Bind threadVM.LoadFileBtn_Click}" Margin="240,0,0,0"/>
             </Grid>
         </StackPanel>
     </Grid>
