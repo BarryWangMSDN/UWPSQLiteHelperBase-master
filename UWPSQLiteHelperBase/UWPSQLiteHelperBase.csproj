@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Helper\CommonHelper.cs" />
     <Compile Include="Helper\CSVParser.cs" />
+    <Compile Include="Helper\IncrementalLoadingBase.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\SqliteHelper1.cs" />
     <Compile Include="Helper\SqliteHelper2.cs" />

@@ -161,6 +161,14 @@ namespace UWPSQLiteHelperBase.ViewModel
            
         }
 
+        public async void FilterReport_Click(object sender, RoutedEventArgs e)
+        {
+            //query Barry Answered Volume
+            var query = threadsmodel.Count(p => p.IsAnswered == "Yes"&&p.Owner=="Barry Wang");
+            
+        }
+
+
         public async void LoadFileBtn_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker filepicker = new FileOpenPicker();
@@ -219,6 +227,7 @@ namespace UWPSQLiteHelperBase.ViewModel
             threadsubstatus.Add(new ThreadType { Substatus = "EscalationNonFTE" });
             threadsubstatus.Add(new ThreadType { Substatus = "Following" });
             threadsubstatus.Add(new ThreadType { Substatus = "BadRequirement" });
+           
         }
     }
 }

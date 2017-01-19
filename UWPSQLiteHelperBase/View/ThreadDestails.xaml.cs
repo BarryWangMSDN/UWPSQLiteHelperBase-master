@@ -30,8 +30,9 @@ namespace UWPSQLiteHelperBase.View
             this.InitializeComponent();
             this.threadVM = new ThreadDetailsVM();
             this.DataContext = threadVM;
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
-      
+
     }
 }
