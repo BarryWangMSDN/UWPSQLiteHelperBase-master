@@ -24,7 +24,7 @@ namespace UWPSQLiteHelperBase.ViewModel
 
         #region Helper Class
         SqliteHelper2 sqlhelper = new SqliteHelper2();
-        CSVParser parser = new CSVParser();
+       
         CSVParserComponent.CsvParser parser2 = new CSVParserComponent.CsvParser();
         CommonHelper helper = new CommonHelper();
         #endregion

@@ -120,6 +120,9 @@
     <Compile Include="View\ThreadDestails.xaml.cs">
       <DependentUpon>ThreadDestails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UnansweredReason.xaml.cs">
+      <DependentUpon>UnansweredReason.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ThreadDestails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UnansweredReason.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
