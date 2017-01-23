@@ -39,13 +39,18 @@ namespace UWPSQLiteHelperBase.Helper
 
         public List<PeopleModel> ReadPeopleTable()
         {
+            List<PeopleModel> people;
             using (var db = DbConnection)
             {
                 db.TraceListener = new DebugTraceListener();
-                List<PeopleModel> people= (from p in db.Table<PeopleModel>()
-                                           select p).ToList();
+
+
+                people = (from p in db.Table<PeopleModel>()
+                          select p).ToList();
                 return people;
             }
+
+
         }
 
         internal void CreateThreadsTable()
@@ -55,7 +60,7 @@ namespace UWPSQLiteHelperBase.Helper
                 var createtableresult = db.CreateTable<ThreadDetailsModel>();
                 var info = db.GetMapping(typeof(ThreadDetailsModel));
             }
-              
+
         }
 
         public List<ThreadDetailsModel> ReadThredsTable()
@@ -64,7 +69,7 @@ namespace UWPSQLiteHelperBase.Helper
             {
                 db.TraceListener = new DebugTraceListener();
                 List<ThreadDetailsModel> threads = (from p in db.Table<ThreadDetailsModel>()
-                                            select p).ToList();
+                                                    select p).ToList();
                 return threads;
             }
         }
@@ -103,7 +108,7 @@ namespace UWPSQLiteHelperBase.Helper
         {
             using (var db = DbConnection)
             {
-              
+
             }
 
         }

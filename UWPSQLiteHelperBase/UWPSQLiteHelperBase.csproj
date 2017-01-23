@@ -100,7 +100,6 @@
       <DependentUpon>infocontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\CommonHelper.cs" />
-    <Compile Include="Helper\CSVParser.cs" />
     <Compile Include="Helper\IncrementalLoadingBase.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\SqliteHelper1.cs" />
@@ -164,6 +163,12 @@
     <SDKReference Include="SQLite.UWP.2015, Version=3.15.1">
       <Name>SQLite for Universal Windows Platform</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSVParserComponent\CSVParserComponent.csproj">
+      <Project>{e7f9f15f-46b9-4319-912a-dd867ca0a84f}</Project>
+      <Name>CSVParserComponent</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -25,6 +25,7 @@ namespace UWPSQLiteHelperBase.ViewModel
         #region Helper Class
         SqliteHelper2 sqlhelper = new SqliteHelper2();
         CSVParser parser = new CSVParser();
+        CSVParserComponent.CsvParser parser2 = new CSVParserComponent.CsvParser();
         CommonHelper helper = new CommonHelper();
         #endregion
         #region property
@@ -179,13 +180,15 @@ namespace UWPSQLiteHelperBase.ViewModel
             if (file != null)
             {
                 var csvtext=await helper.ReadStringFromFile(file);
-                parser.RawText = csvtext;               
-                parser.HasHeaderRow = true;
-                List<Dictionary<string, string>> parserresult =parser.Parse();
-                parserresult.RemoveAt(parserresult.Count-1);
+                //parser.RawText = csvtext;               
+                //parser.HasHeaderRow = true;
+                //List<Dictionary<string, string>> parserresult =parser.Parse();
+                parser2.RawText = csvtext;
+                var testresult = await parser2.Parse();
+                //parserresult.RemoveAt(parserresult.Count-1);
                 //try
                 //{
-                    foreach (var result in parserresult)
+                    foreach (var result in testresult)
                     {
                         ThreadDetailsModel recorditem = new ThreadDetailsModel();                  
                         recorditem.Casetype = result["Sub Status"];

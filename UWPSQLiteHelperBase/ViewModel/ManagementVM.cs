@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UWPSQLiteHelperBase.Model;
 using UWPSQLiteHelperBase.Helper;
+using System.Diagnostics;
 
 namespace UWPSQLiteHelperBase.ViewModel
 {
@@ -39,8 +40,16 @@ namespace UWPSQLiteHelperBase.ViewModel
             //this.defaultpeoplemodel.Add(new PeopleModel { ID = 8, Alias = "n/a", Name = "MingHao Zhu", PermissionLevel = 2 });
             //this.defaultpeoplemodel.Add(new PeopleModel { ID = 9, Alias = "n/a", Name = "Xiaoxiao Ma", PermissionLevel = 2 });
             SqliteHelper2 helper = new SqliteHelper2();
-            List<PeopleModel> peoplelist=helper.ReadPeopleTable();
-            peoplelist.ForEach(p => defaultpeoplemodel.Add(p));//transfer List<T> to ObservableCollection
+            try
+            {
+                List<PeopleModel> peoplelist = helper.ReadPeopleTable();
+                peoplelist.ForEach(p => defaultpeoplemodel.Add(p));//transfer List<T> to ObservableCollection
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message.ToString());
+            }       
+          
         }
            
     }
