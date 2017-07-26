@@ -15,6 +15,9 @@ namespace UWPSQLiteHelperBase.Helper
 {
     public class SqliteHelper2
     {
+        private static String DB_NAME = "test.db";
+        private static String TABLE_NAME = "SampleTable";
+
         #region HelperMethod
         /// <summary> 
         /// Writes SQLite.NET trace to the Debug window. 
@@ -31,11 +34,23 @@ namespace UWPSQLiteHelperBase.Helper
         {
             get
             {
-                return new SQLiteConnection(
-                    new SQLitePlatformWinRT(),
-                    Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.db"));
+                return ConnectDB(DB_NAME);
             }
         }
+
+        private static SQLiteConnection ConnectDB(string tablename)
+        {
+            var connection=new SQLiteConnection(
+                    new SQLitePlatformWinRT(),
+                    Path.Combine(ApplicationData.Current.LocalFolder.Path, tablename));
+            return connection;
+        }
+
+        private void CreateDb(string tablename)
+        {
+            var db = new SQLiteConnection(new SQLitePlatformWinRT(), Path.Combine(ApplicationData.Current.LocalFolder.Path, tablename), SQLite.Net.Interop.SQLiteOpenFlags.Create | SQLite.Net.Interop.SQLiteOpenFlags.ReadWrite);
+        }
+       
 
         public List<PeopleModel> ReadPeopleTable()
         {
