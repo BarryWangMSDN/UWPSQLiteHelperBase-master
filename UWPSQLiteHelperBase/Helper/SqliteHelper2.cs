@@ -30,7 +30,7 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
         #endregion
-        private static SQLiteConnection DbConnection
+        public static SQLiteConnection DbConnection
         {
             get
             {
@@ -38,18 +38,18 @@ namespace UWPSQLiteHelperBase.Helper
             }
         }
 
-        private static SQLiteConnection ConnectDB(string tablename)
+        private static SQLiteConnection ConnectDB(string dbname)
         {
             var connection=new SQLiteConnection(
                     new SQLitePlatformWinRT(),
-                    Path.Combine(ApplicationData.Current.LocalFolder.Path, tablename));
+                    Path.Combine(ApplicationData.Current.LocalFolder.Path, dbname));
             return connection;
         }
 
-        private void CreateDb(string tablename)
-        {
-            var db = new SQLiteConnection(new SQLitePlatformWinRT(), Path.Combine(ApplicationData.Current.LocalFolder.Path, tablename), SQLite.Net.Interop.SQLiteOpenFlags.Create | SQLite.Net.Interop.SQLiteOpenFlags.ReadWrite);
-        }
+        //private void CreateDb(string tablename)
+        //{
+        //    var db = new SQLiteConnection(new SQLitePlatformWinRT(), Path.Combine(ApplicationData.Current.LocalFolder.Path, tablename), SQLite.Net.Interop.SQLiteOpenFlags.Create | SQLite.Net.Interop.SQLiteOpenFlags.ReadWrite);
+        //}
        
 
         public List<PeopleModel> ReadPeopleTable()

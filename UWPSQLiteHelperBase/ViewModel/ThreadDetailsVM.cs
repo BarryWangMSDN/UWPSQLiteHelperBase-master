@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UWPSQLiteHelperBase.Model;
 using UWPSQLiteHelperBase.Helper;
@@ -13,12 +12,10 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.Storage.Pickers;
 using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.UI.Popups;
 
 namespace UWPSQLiteHelperBase.ViewModel
 {
-   public class ThreadDetailsVM:INotifyPropertyChanged
+    public class ThreadDetailsVM:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -214,9 +211,21 @@ namespace UWPSQLiteHelperBase.ViewModel
         #endregion
         public ThreadDetailsVM()
         {
-            //ListView data refersh
-           
-            sqlhelper.CreateThreadsTable();        
+            try
+            {
+                //ListView data refersh            
+                CreateDatabase();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+
+        public async Task CreateDatabase()
+        {
+            sqlhelper.CreateThreadsTable();
             List<ThreadDetailsModel> peoplelist = sqlhelper.ReadThredsTable();
             peoplelist.ForEach(p => threadsmodel.Add(p));
             //Textbox data initialization(test data)
@@ -230,7 +239,6 @@ namespace UWPSQLiteHelperBase.ViewModel
             threadsubstatus.Add(new ThreadType { Substatus = "EscalationNonFTE" });
             threadsubstatus.Add(new ThreadType { Substatus = "Following" });
             threadsubstatus.Add(new ThreadType { Substatus = "BadRequirement" });
-           
         }
     }
 }

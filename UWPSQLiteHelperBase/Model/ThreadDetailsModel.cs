@@ -90,6 +90,13 @@ namespace UWPSQLiteHelperBase.Model
             set { isanswered = value; }
         }
 
+        private DateTime createtime;
+
+        public DateTime CreateTime
+        {
+            get { return createtime; }
+            set { createtime = value; }
+        }
 
 
     }
